@@ -57,7 +57,7 @@ export default function Weather(){
             <button onClick={()=>{setChanged(!changed)
                             setClicked(true)
                 }}>Search</button>
-            {loading? <div><p>Loading data...</p></div>: <></>}
+            {loading? <p>Loading data...</p>: <></>}
 
             {clicked?
             <div class="weather-cards">
