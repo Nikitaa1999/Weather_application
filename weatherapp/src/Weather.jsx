@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import "./Weather.css"
 
 export default function Weather(){
-    const[input, setInput]=useState("Mumbai");
+    const[input, setInput]=useState("");
     const[changed, setChanged] = useState(true);
     const[temp, setTemp] = useState(0);
     const[humidity, setHumidity] = useState(0);
@@ -33,7 +33,7 @@ export default function Weather(){
 
        })
        .catch((error)=>{
-        console.log("There was this error=>",error)
+       // console.log("There was this error=>",error)
         if(error.response.status===400){
             alert("Failed to fetch weather data");
         }
@@ -49,7 +49,7 @@ export default function Weather(){
         <div>
             <input
                 type="text"
-                placeholder="Enter City Name"
+                placeholder="Enter city name"
                 value={input}
                 onChange={(event) => setInput(event.target.value)}
             />
