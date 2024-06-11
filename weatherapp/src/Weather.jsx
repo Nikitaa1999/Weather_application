@@ -14,6 +14,7 @@ export default function Weather(){
 
 
     useEffect(()=>{
+        if(input){
         setLoading(true);
        const url="https://api.weatherapi.com/v1/current.json";
        const api_key="500a8792bd594f65bd6192109241403"
@@ -41,7 +42,7 @@ export default function Weather(){
        .finally(
         setLoading(false)
        )
-
+    }
     },[changed])
 
 
