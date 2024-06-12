@@ -9,16 +9,18 @@ export default function Weather(){
     const[humidity, setHumidity] = useState(0);
     const[condition, setCondition] = useState("");
     const[windSpeed, setWindSpeed] = useState(0);
-    const [loading, setLoading] =useState(false);
+    const[loading, setLoading] = useState(false);
     const [clicked,setClicked]= useState(false);
 
 
     useEffect(()=>{
         if(input){
-        setLoading(true);
+        
        const url="https://api.weatherapi.com/v1/current.json";
-       const api_key="500a8792bd594f65bd6192109241403"
+       const api_key="500a8792bd594f65bd6192109241403";
 
+       setLoading(true);
+            console.log("loading",loading)
         axios.get(url,{
         params:{
             key:api_key,
@@ -31,7 +33,7 @@ export default function Weather(){
         setHumidity(res.data.current.humidity);
         setCondition(res.data.current.condition.text);
         setWindSpeed(res.data.current.wind_kph);
-
+        setLoading(false);
        })
        .catch((error)=>{
        // console.log("There was this error=>",error)
@@ -39,11 +41,44 @@ export default function Weather(){
             alert("Failed to fetch weather data");
         }
        })
-       .finally(
-        setLoading(false)
-       )
+    //    .finally(
+    //     setLoading(false)
+    //    )
     }
     },[changed])
+
+
+    // const handleInput=()=>{
+    //     if(input){
+    //     setLoading(true);
+    //    const url="https://api.weatherapi.com/v1/current.json";
+    //    const api_key="500a8792bd594f65bd6192109241403"
+
+    //     axios.get(url,{
+    //     params:{
+    //         key:api_key,
+    //         q: input,
+    //     },
+    //    })
+    //    .then((res)=>{
+    //     console.log(res);
+    //     setTemp(res.data.current.temp_c);
+    //     setHumidity(res.data.current.humidity);
+    //     setCondition(res.data.current.condition.text);
+    //     setWindSpeed(res.data.current.wind_kph);
+
+    //    })
+    //    .catch((error)=>{
+    //    // console.log("There was this error=>",error)
+    //     if(error.response.status===400){
+    //         alert("Failed to fetch weather data");
+    //     }
+    //    })
+    //    .finally(
+    //     setLoading(false)
+    //    )
+    // }
+    // }
 
 
     return(
@@ -57,7 +92,9 @@ export default function Weather(){
             <button onClick={()=>{setChanged(!changed)
                             setClicked(true)
                 }}>Search</button>
-            {loading? <p>Loading data...</p>: <></>}
+
+                
+            {loading ? <div><p>Loading data...</p> </div>: <>
 
             {clicked?
             <div class="weather-cards">
@@ -82,7 +119,7 @@ export default function Weather(){
             <></>
             }
 
-           
+            </>}
         </div>
     )
 } 
